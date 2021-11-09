@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="index.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="outfit.css" />
+    <title>建議穿搭</title>
+    <style></style>
+  </head>
+  <body>
+    <!-- body start -->
+    <!-- =========header start========= -->
+    <header class="header sticky-top">
+      <a href="./HomepageIndex.html" class="logo_top">
+        <img src="../images/logo.png" alt="logo_top" />
+      </a>
+      <div class="btns d-flex">
+        <a href="#" class="search_button"><i class="bi bi-search h4"></i></a>
+        <a
+          href="./shopping-1-content.html"
+          class="shopping_button position-relative"
+        >
+          <div class="cart-num position-absolute text-center">0</div>
+          <i class="bi bi-cart h4"></i>
+        </a>
+        <a href="./member-login.html" class="sign_button">Sign In</a>
+      </div>
+      <!-- =========nav start========= -->
+      <nav class="nav">
+        <ul class="list-unstyled d-flex">
+          <li>
+            <a class="nav-font" href="./mountain_index.html">路線地圖</a>
+          </li>
+          <li>
+            <a class="nav-font" href="../Article/article-recommend.html"
+              >推薦攻略</a
+            >
+          </li>
+          <li>
+            <a class="nav-font" href="./product.html">購物商城</a>
+          </li>
+          <li>
+            <a class="nav-font" href="./outfit.html">建議穿搭</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="btn_nav">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <!-- <a class="btn_nav btn_close"></a> -->
+      <!-- =========nav end========= -->
+    </header>
+    <!-- =========header end========= -->
+
+    <!-- =========content start========= -->
+    <h2 class="outfit-title">建議穿搭</h2>
+    <p class="outfit-intro">依下面步驟來挑選最佳商品搭配並製作出個人化明信片</p>
+    <div class="outfit-content">
+      <div class="outfit-sub-content">
+        <div class="container">
+          <div class="row my-3 d-flex justify-content-center">
+            <div class="outfit-right-side-container">
+              <div class="outfit-left-side position-relative">
+                <div class="outfit-bear position-absolute position-relative">
+                  <div
+                    class="
+                      outfit-dialogBox1
+                      animate__animated animate__bounceInUp animate__slow
+                      position-absolute
+                    "
+                  >
+                    <img src="../images/img-outfit/dialogBox1.svg" alt="" />
+                  </div>
+                  <div
+                    class="
+                      outfit-dialogBox2
+                      animate__animated animate__bounceInDown animate__slow
+                      position-absolute
+                    "
+                  >
+                    <img src="../images/img-outfit/dialogBox2.svg" alt="" />
+                  </div>
+                  <div
+                    class="animate__animated animate__backInLeft animate__fast"
+                  >
+                    <img src="../images/img-outfit/bear.svg" alt="" />
+                  </div>
+                  <div
+                    class="outfit-mountains position-absolute position-relative"
+                  >
+                    <div class="outfit-low-mountain outfit-level" target="1">
+                      <span>初階</span>
+                    </div>
+                    <div class="outfit-high-mountain outfit-level" target="3">
+                      <span>高階</span>
+                    </div>
+                    <div class="outfit-mid-mountain outfit-level" target="2">
+                      <span>中階</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="outfit-right-side">
+              <div id="div1" class="target">
+                <!-- level low product-warpper start -->
+                <div class="outfit-product-slider">
+                  <i
+                    class="fas fa-caret-left outfit-prev mb-1"
+                    id="slideLeft"
+                  ></i>
+
+                  <i
+                    class="fas fa-caret-right outfit-next mb-1"
+                    id="slideRight"
+                  ></i>
+                  <div class="outfit-product-wrapper slider">
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic1-removebg-preview.png"
+                          alt="The North Face
+                        黑色便捷休閒腰包"
+                          title="The North Face
+                        黑色便捷休閒腰包"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="10"
+                          data-productbrand="The North Face"
+                          data-productname="黑色便捷休閒腰包"
+                          data-price="1780"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          The North Face
+                          <br />
+                          黑色便捷休閒腰包
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic2-removebg-preview.png"
+                          alt="The North Face 黑灰色休閒後背包"
+                          title="The North Face 黑灰色休閒後背包"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="11"
+                          data-productbrand="The North Face"
+                          data-productname="黑灰色休閒後背包"
+                          data-price="2180"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          The North Face
+                          <br />
+                          黑灰色休閒後背包
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic3-removebg-preview.png"
+                          alt="The North Face 黑色舒適休閒後背包"
+                          title="The North Face 黑色舒適休閒後背包"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="12"
+                          data-productbrand="The North Face"
+                          data-productname="黑色舒適休閒後背包"
+                          data-price="5292"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          The North Face
+                          <br />
+                          黑色舒適休閒後背包
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic1-removebg-preview.png"
+                          alt="MERRELL 女水陸三棲鞋"
+                          title="MERRELL 女水陸三棲鞋"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="1"
+                          data-productbrand="MERRELL"
+                          data-productname="女水陸三棲鞋"
+                          data-price="2680"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          MERRELL
+                          <br />
+                          女水陸三棲鞋
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic2-removebg-preview.png"
+                          alt="TEVA 低筒防潑水休閒鞋"
+                          title="TEVA 低筒防潑水休閒鞋"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="2"
+                          data-productbrand="TEVA"
+                          data-productname="低筒防潑水休閒鞋"
+                          data-price="2706"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          TEVA
+                          <br />
+                          低筒防潑水休閒鞋
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic3-removebg-preview.png"
+                          alt="KEEN 戶外防水登山鞋"
+                          title="KEEN 戶外防水登山鞋"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="3"
+                          data-productbrand="KEEN"
+                          data-productname="戶外防水登山鞋"
+                          data-price="3915"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          KEEN
+                          <br />
+                          戶外防水登山鞋
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic1-removebg-preview.png"
+                          alt="QUECHUA 男透氣休閒健行外套"
+                          title="QUECHUA 男透氣休閒健行外套"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="19"
+                          data-productbrand="QUECHUA"
+                          data-productname="男透氣休閒健行外套"
+                          data-price="499"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          QUECHUA
+                          <br />
+                          男透氣休閒健行外套
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic2-removebg-preview.png"
+                          alt="KALENJI男士透氣連帽跑步風衣"
+                          title="KALENJI男士透氣連帽跑步風衣"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="20"
+                          data-productbrand=""
+                          data-productname="KALENJI 男士透氣連帽跑步風衣"
+                          data-price="499"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          KALENJI
+                          <br />
+                          男士透氣連帽跑步風衣
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic3-removebg-preview.png"
+                          alt="QUECHUA 女透氣健行外套"
+                          title="QUECHUA 女透氣健行外套"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="21"
+                          data-productbrand="QUECHUA"
+                          data-productname="女透氣健行外套"
+                          data-price="499"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          QUECHUA
+                          <br />
+                          女透氣健行外套
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- level low product-warpper end -->
+              </div>
+              <div id="div2" class="target">
+                <!-- level mid product-warpper start -->
+                <div class="outfit-product-slider">
+                  <i
+                    class="fas fa-caret-left outfit-prev mb-1"
+                    id="slideLeft"
+                  ></i>
+
+                  <i
+                    class="fas fa-caret-right outfit-next mb-1"
+                    id="slideRight"
+                  ></i>
+                  <div class="outfit-product-wrapper slider" id="slider2">
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic4-removebg-preview.png"
+                          alt="Karrimor sector 25 休閒登山後背包"
+                          title="Karrimor sector 25 休閒登山後背包"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="13"
+                          data-productbrand="Karrimor"
+                          data-productname="sector 25 休閒登山後背包"
+                          data-price="3510"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          Karrimor
+                          <br />
+                          sector 25 休閒登山後背包
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic5-removebg-preview.png"
+                          alt="MAMMUT長毛象 Lithium Speed 20L"
+                          title="MAMMUT長毛象 Lithium Speed 20L"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="14"
+                          data-productbrand="MAMMUT長毛象"
+                          data-productname="Lithium Speed 20L"
+                          data-price="4480"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          MAMMUT長毛象
+                          <br />
+                          Lithium Speed 20L
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic6-removebg-preview.png"
+                          alt="Arcteryx 始祖鳥 徒步背包 Brize 32"
+                          title="Arcteryx 始祖鳥 徒步背包 Brize 32"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="15"
+                          data-productbrand="Arcteryx 始祖鳥"
+                          data-productname="徒步背包 Brize 32"
+                          data-price="8341"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          Arcteryx 始祖鳥
+                          <br />
+                          徒步背包 Brize 32
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic4-removebg-preview.png"
+                          alt="SALOMON EVASION 登山健行鞋"
+                          title="SALOMON EVASION 登山健行鞋"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="4"
+                          data-productbrand="SALOMON"
+                          data-productname="EVASION 登山健行鞋"
+                          data-price="4577"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          SALOMON
+                          <br />
+                          EVASION 登山健行鞋
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic5-removebg-preview.png"
+                          alt="Caravan C403 登山健行鞋"
+                          title="Caravan C403 登山健行鞋"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="5"
+                          data-productbrand="Caravan"
+                          data-productname="C403 登山健行鞋"
+                          data-price="4740"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          Caravan
+                          <br />
+                          C403 登山健行鞋
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic6-removebg-preview.png"
+                          alt="SALOMON X Ultra2 低筒登山鞋"
+                          title="SALOMON X Ultra2 低筒登山鞋"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="6"
+                          data-productbrand="SALOMON"
+                          data-productname="X Ultra2 低筒登山鞋"
+                          data-price="2790"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          SALOMON
+                          <br />X Ultra2 低筒登山鞋
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic4-removebg-preview.png"
+                          alt="Arcteryx 始祖鳥 Cerium SV 保暖羽絨連帽外套"
+                          title="Arcteryx 始祖鳥 Cerium SV 保暖羽絨連帽外套"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="22"
+                          data-productbrand="Arcteryx 始祖鳥"
+                          data-productname="Cerium SV 保暖羽絨連帽外套"
+                          data-price="23800"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          Arcteryx 始祖鳥
+                          <br />
+                          Cerium SV 保暖羽絨連帽外套
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic5-removebg-preview.png"
+                          alt="The North Face 戶外保暖羽絨外套"
+                          title="The North Face 戶外保暖羽絨外套"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="23"
+                          data-productbrand="The North Face"
+                          data-productname="戶外保暖羽絨外套"
+                          data-price="8310"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          The North Face
+                          <br />
+                          戶外保暖羽絨外套
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic6-removebg-preview.png"
+                          alt="Mont-Bell Light Alpine 連帽羽絨外套"
+                          title="Mont-Bell Light Alpine 連帽羽絨外套"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="24"
+                          data-productbrand="Mont-Bell"
+                          data-productname="Light Alpine 連帽羽絨外套"
+                          data-price="5580"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          Mont-Bell
+                          <br />
+                          Light Alpine 連帽羽絨外套
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- level mid product-warpper end -->
+              </div>
+              <div id="div3" class="target">
+                <!-- level low product-warpper start -->
+                <div class="outfit-product-slider">
+                  <i
+                    class="fas fa-caret-left outfit-prev mb-1"
+                    id="slideLeft"
+                  ></i>
+
+                  <i
+                    class="fas fa-caret-right outfit-next mb-1"
+                    id="slideRight"
+                  ></i>
+
+                  <div class="outfit-product-wrapper slider">
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic7-removebg-preview.png"
+                          alt="GREGORY JADE 38 登山背包"
+                          title="GREGORY JADE 38 登山背包"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="16"
+                          data-productbrand="GREGORY"
+                          data-productname="JADE 38 登山背包"
+                          data-price="6070"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          GREGORY
+                          <br />
+                          JADE 38 登山背包
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic8-removebg-preview.png"
+                          alt="The North Face 藍色專業登山後背包"
+                          title="The North Face 藍色專業登山後背包"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="17"
+                          data-productbrand="The North Face"
+                          data-productname="藍色專業登山後背包"
+                          data-price="8380"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          The North Face
+                          <br />
+                          藍色專業登山後背包
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/bags-pic9-removebg-preview.png"
+                          alt="The North Face 黑色舒適防護專業後背包"
+                          title="The North Face 黑色舒適防護專業後背包"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="18"
+                          data-productbrand="The North Face"
+                          data-productname="黑色舒適防護專業後背包"
+                          data-price="4923"
+                          data-type="2"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          The North Face
+                          <br />
+                          黑色舒適防護專業後背包
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic7-removebg-preview.png"
+                          alt="CARPA GORE-TEX登山鞋"
+                          title="CARPA GORE-TEX登山鞋"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="7"
+                          data-productbrand="CARPA"
+                          data-productname="GORE-TEX登山鞋"
+                          data-price="4779"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          CARPA
+                          <br />
+                          GORE-TEX登山鞋
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic8-removebg-preview.png"
+                          alt="ASOLO 阿空加瓜牛皮冰攀靴"
+                          title="ASOLO 阿空加瓜牛皮冰攀靴"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="8"
+                          data-productbrand="ASOLO"
+                          data-productname="阿空加瓜牛皮冰攀靴"
+                          data-price="8980"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          ASOLO
+                          <br />
+                          阿空加瓜牛皮冰攀靴
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/shoes-pic9-removebg-preview.png"
+                          alt="Zamberlan 皮革登山靴"
+                          title="Zamberlan 皮革登山靴"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="9"
+                          data-productbrand="Zamberlan"
+                          data-productname="皮革登山靴"
+                          data-price="14580"
+                          data-type="1"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          Zamberlan
+                          <br />
+                          皮革登山靴
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic7-removebg-preview.png"
+                          alt="Arcteryx 始祖鳥 單件式GORE-TEX化纖保暖外套"
+                          title="Arcteryx 始祖鳥 單件式GORE-TEX化纖保暖外套"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="25"
+                          data-productbrand="Arcteryx 始祖鳥"
+                          data-productname="單件式GORE-TEX化纖保暖外套"
+                          data-price="27360"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          Arcteryx 始祖鳥
+                          <br />
+                          單件式GORE-TEX化纖保暖外套
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic8-removebg-preview.png"
+                          alt="The North Face Summit L5 FUTURELIGHT"
+                          title="The North Face Summit L5 FUTURELIGHT"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="26"
+                          data-productbrand="The North Face"
+                          data-productname="Summit L5 FUTURELIGHT"
+                          data-price="18200"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          The North Face
+                          <br />
+                          Summit L5 FUTURELIGHT
+                        </p>
+                      </div>
+                    </div>
+                    <div class="outfit-product">
+                      <div class="outfit-product-img">
+                        <img
+                          src="../images/img-outfit/clothes-pic9-removebg-preview.png"
+                          alt="歐都納 女款專業登山兩件式防水外套"
+                          title="歐都納 女款專業登山兩件式防水外套"
+                          class="outfit-slider-image outfit-cover-fit"
+                          draggable
+                          id="27"
+                          data-productbrand="歐都納"
+                          data-productname="女款專業登山兩件式防水外套"
+                          data-price="13650"
+                          data-type="3"
+                        />
+                      </div>
+                      <div class="outfit-product-info">
+                        <p>
+                          歐都納 <br />
+                          女款專業登山兩件式防水外套
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- level mid product-warpper end -->
+              </div>
+            </div>
+            <!-- 製作個人化明信片 start -->
+            <div class="canvasWrap">
+              <h3 class="outfit-subTitle">製作個人化明信片</h3>
+              <div class="outfit-underline"></div>
+              <div class="outfit-canvas-box cvs" id="canvasBox">
+                <div
+                  class="
+                    outfit-canvas-target
+                    position-absolute position-relative
+                  "
+                >
+                  <p style="display: block" id="hide">
+                    請將以上商品
+                    <br />
+                    拖曳加入至此
+                  </p>
+                  <canvas id="canvas"></canvas>
+                </div>
+              </div>
+            </div>
+            <!-- 製作個人化明信片 end -->
+            <!-- 訂購單 start -->
+            <div class="order">
+              <div class="orderTitle">
+                <p class="order-head mr-3">穿搭組合</p>
+                <p class="order-head">NT$ <span id="subtotal">0</span></p>
+              </div>
+
+              <div
+                class="newItemsNotice"
+                id="newItemsNotice"
+                style="display: flex"
+              >
+                <p>
+                  請將商品，拖曳至明信片處，
+                  <br />
+                  即可製作明信片並組合穿搭！
+                </p>
+              </div>
+
+              <div id="newItems">
+                <!-- 要用js innerHTML的內容 start -->
+                <!-- <div class="newItem">
+                  <div class="productPic">
+                    <img
+                      class="outfit-cover-fit"
+                      src="../images/img-outfit/clothes-pic1-removebg-preview.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="productName">
+                    SALOMON EVASION GORE-TEX登山健行鞋
+                  </div>
+                  <div>12500</div>
+                </div> -->
+                <!-- 要用js innerHTML的內容 end -->
+              </div>
+            </div>
+            <!-- 訂購單 end -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="outfit-btnGroup">
+      <span>分享：</span>
+      <i class="fab fa-facebook-square fb-share-button outfit-sharedBtn"></i>
+      <i
+        class="fab fa-twitter-square twitter-share-button outfit-sharedBtn"
+      ></i>
+      <i class="fab fa-line line-share-button"></i>
+      <button class="btn btn-outline-primary" id="save" onClick="{save}">
+        <i class="fas fa-download outfit-downloadBtn mb-1"></i>
+        儲存明信片
+      </button>
+      <button class="btn btn-primary outfit-cart">將所選商品加入購物車</button>
+    </div>
+    <!-- =========content end========= -->
+
+    <!-- =========footer start========= -->
+    <footer class="footer">
+      <div class="footer_box">
+        <div class="d-flex justify-content-center">
+          <div class="footer_head">
+            <a class="nav-font" href="./mountain_index.html">路線地圖</a>
+          </div>
+          <div class="footer_head">
+            <a class="nav-font" href="../Article/article-recommend.html"
+              >推薦攻略</a
+            >
+          </div>
+          <a href="./HomepageIndex.html" class="footer_logo">
+            <img src="../images/logo.png" alt="footer_logo" />
+          </a>
+          <div class="footer_head">
+            <a class="nav-font" href="./product.html">購物商城</a>
+          </div>
+          <div class="footer_head_last">
+            <a class="nav-font_footerLast" href="./outfit.html">建議穿搭</a>
+          </div>
+        </div>
+
+        <div class="footer_line"></div>
+
+        <div class="d-flex justify-content-center">
+          <div class="footer_info">聯絡資訊</div>
+          <div class="footer_info">參考資訊</div>
+        </div>
+      </div>
+
+      <div class="footer_copy d-flex justify-content-center">
+        &copy;Copyright, Inc. 2021. MFEE17-第五組專題
+      </div>
+    </footer>
+    <!-- =========footer end========= -->
+    <!-- body end -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="fabric.js"></script>
+    <script src="outfit.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  </body>
+</html>
