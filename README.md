@@ -48,8 +48,8 @@
 
 - 使用 Bootstrap 框架實現 RWD 響應式網頁設計
 
-[Demo](https://tzulingtseng.github.io/portfolio/template-fullpage/index.html) |
-[GitHub 程式碼](https://github.com/tzulingtseng/tzulingtseng.github.io/tree/main/portfolio/template-fullpage)
+[Demo](https://tzulingtseng.github.io/portfolio/template-hairmap/indexHair.html) |
+[GitHub 程式碼](https://github.com/tzulingtseng/tzulingtseng.github.io/tree/main/portfolio/template-hairmap)
 
 ![](https://i.imgur.com/kOMBB2K.png)
 
@@ -61,6 +61,6 @@
 
 使用 React.js  完成 todo list
 
-[Demo] | [GitHub 程式碼](https://github.com/tzulingtseng/tzulingtseng.github.io/tree/main/portfolio/react_todolist)
+[GitHub 程式碼](https://github.com/tzulingtseng/tzulingtseng.github.io/tree/main/portfolio/react_todolist)
 
 ![](https://i.imgur.com/DoLMX9c.png)
