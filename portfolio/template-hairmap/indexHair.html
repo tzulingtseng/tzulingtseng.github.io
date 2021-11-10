@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>indexHair</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/17f3e4a190.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      :root {
+        --primary-color: rgb(168, 77, 97);
+        --primary-hover-color: rgb(168, 18, 93);
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      body {
+        background: #eee;
+      }
+
+      .main-nav {
+        background: #fff;
+        padding: 10px 0;
+      }
+
+      .btn-primary {
+        background: var(--primary-color);
+        border: none;
+        border-radius: 0;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-hover-color);
+        border: none;
+      }
+
+      .main-nav li a {
+        display: block;
+        color: #333;
+        padding: 10px 16px;
+        text-decoration: none;
+      }
+
+      .logo {
+        height: 36px;
+      }
+
+      .setting-btn {
+        height: 100%;
+        width: 64px;
+        background: url("images/setting.png") left center;
+      }
+
+      .menu-btn {
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .menu-btn::before {
+        content: "";
+        position: absolute;
+        height: 5px;
+        left: 2px;
+        width: 36px;
+        background-color: #aaa;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        box-shadow: 0px 8px 0px #aaa, 0px -8px 0px #aaa;
+      }
+
+      .hero {
+        /* min-height: 80vh; */
+        background: url("images/long-hair.jpg");
+        background-size: cover;
+        position: relative;
+      }
+
+      .hero-mask {
+        background: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        height: 100%;
+        /* 不能直接用 */
+        width: 100%;
+      }
+
+      .hero-logo {
+        height: 250px;
+      }
+
+      .search-block {
+        border: 1px solid var(--primary-color);
+        padding: 2px;
+        background: rgba(0, 0, 0, 0.7);
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .search-block div:first-child {
+        display: flex;
+        align-items: center;
+        border-right: 1px solid var(--primary-color);
+        padding-right: 10px;
+      }
+
+      .search-text {
+        margin: 0 5px;
+        flex-grow: 1;
+      }
+
+      .search-block input[type="text"] {
+        height: 100%;
+        background: transparent;
+        border: none;
+        width: 100%;
+        height: 37px;
+      }
+
+      @media screen and (max-width: 768px) {
+        .search-block {
+          flex-wrap: wrap;
+          margin-bottom: 80px;
+        }
+
+        /* flex-wrap: wrap當寬度不夠時會自動換行 */
+        .btn {
+          width: 100%;
+        }
+
+        /* 把要掉下去那行寬度設為滿格 */
+        .search-block .btn {
+          position: absolute;
+          top: 46px;
+          left: 1px;
+        }
+      }
+
+      .slogan {
+        margin-top: 50px;
+        padding: 40px 0;
+        background: url("images/bg_icon.png");
+      }
+
+      .cover-fit {
+        width: 100%;
+        height: 100%;
+        object-position: cover;
+      }
+
+      .underline {
+        width: 40px;
+        height: 3px;
+        background: black;
+        margin: 0 auto;
+        position: absolute;
+        bottom: -15%;
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      .topicTags {
+        background: rgb(255, 255, 255, 0.8);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        width: 50%;
+        padding: 2% 0;
+        text-align: center;
+        transform: translate(110%, -200%);
+      }
+
+      .more {
+        color: #fff;
+        background: var(--primary-color);
+        width: 50px;
+        text-align: center;
+        text-decoration: none;
+        position: absolute;
+        right: 12px;
+      }
+
+      .designer .card {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 100%;
+      }
+
+      .designer .card img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8);
+      }
+
+      .designer p {
+        /* left: 28%;
+                bottom: 30%; */
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-shadow: black 0.1em 0.1em 0.2em;
+        color: white;
+      }
+
+      .designer span {
+        width: 60%;
+        margin: 0 auto;
+        text-align: center;
+        color: rgb(103, 99, 99);
+      }
+
+      .trend img {
+        filter: brightness(0.8);
+      }
+
+      .trendText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-shadow: black 0.1em 0.1em 0.2em;
+      }
+
+      .main-footer {
+        background: rgb(219, 219, 219);
+        margin: 80px auto 0px;
+        z-index: -1;
+        width: 90%;
+      }
+
+      .footerTop .img1 {
+        height: 240px;
+      }
+
+      .footerTop .underline {
+        left: 36%;
+      }
+
+      .footerTop p {
+        color: var(--primary-color);
+      }
+
+      .footerCenter-mask {
+        position: relative;
+        height: 100%;
+        /* 不能直接用 */
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .footerCenter-bg {
+        width: 100%;
+        height: 100%;
+        background: url("images/slide2.jpg") center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: brightness(0.5) blur(5px);
+        position: absolute;
+        z-index: 2;
+      }
+
+      .footerCenter-bg-text {
+        /* background-color: rgba(0, 0, 0, 0.4); */
+        color: white;
+        position: relative;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%);
+        z-index: 2;
+        width: 60%;
+        text-align: center;
+        /* margin:5% 0; */
+      }
+
+      .footerCenterDivider {
+        border-left: 2px dotted #fff;
+        height: 80%;
+        position: absolute;
+        right: 50%;
+        top: 10px;
+      }
+
+      .footerCenter-bg-bottom {
+        width: 100%;
+        position: relative;
+        bottom: 20%;
+        left: 50%;
+        transform: translate(-50%);
+        z-index: 2;
+        width: 100%;
+        text-align: center;
+        /* border: 1px solid black; */
+      }
+
+      .footerCenter-bg-bottomBt {
+        width: 120px;
+        padding: 10px 0;
+        margin-left: 10px;
+        background: rgba(219, 219, 219, 0.8);
+        /* border: 1px solid black; */
+      }
+
+      .footerBottom {
+        color: rgb(103, 99, 99, 0.7);
+      }
+
+      .footerBottom img {
+        height: 40px;
+        /* width:20px  */
+      }
+
+      .ft-icon {
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        object-fit: contain;
+      }
+
+      .ftRight-icon {
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 10px 0;
+        width: 60%;
+        text-align: center;
+      }
+
+      @media screen and (max-width: 768px) {
+        .footerTop .img1 {
+          height: 180px;
+        }
+
+        .ftRight-icon {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="main-nav">
+      <div class="container">
+        <div class="d-flex justify-content-between flex-md-0">
+          <div class="d-flex">
+            <a href=""
+              ><img class="logo" src="images/logo.png" alt="HairMap"
+            /></a>
+            <ul class="list-unstyled d-none d-md-flex m-0">
+              <li><a href="">找髮型</a></li>
+              <li><a href="">找設計師</a></li>
+              <li><a href="">美髮誌</a></li>
+            </ul>
+          </div>
+          <div class="d-flex">
+            <ul class="list-unstyled d-none d-md-flex m-0">
+              <li><a href="">註冊</a></li>
+              <li><a href="">登入</a></li>
+              <li><a class="setting-btn"></a></li>
+            </ul>
+            <div class="d-block d-md-none menu-btn"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="hero-mask"></div>
+      <div class="container position-relative">
+        <div class="text-center py-3">
+          <img class="hero-logo" src="images/logo_icon_w2.svg" alt="" />
+          <h1 class="text-white py-2">煩惱髮型嗎</h1>
+          <h2 class="text-white h5">給你最多髮型靈感及在地設計師</h2>
+        </div>
+        <div class="search-block position-relative d-flex">
+          <div class="text-white">
+            <img src="images/icon_searchbar_location.png" alt="" />
+            找地區
+          </div>
+          <div class="search-text">
+            <input type="text" />
+          </div>
+
+          <button class="btn btn-primary">
+            <img src="images/icon_searchbar_search.png" alt="" />
+            去逛逛
+          </button>
+        </div>
+      </div>
+      <div class="slogan position-relative">
+        <div class="container">
+          <div class="row justify-content-center text-white text-center">
+            <div class="col-lg-3 my-lg-o my-3">
+              <img src="images/icon_search.png" alt="" />
+              <h5>在地設計師<br />輕鬆找</h5>
+            </div>
+            <div class="col-lg-3 my-lg-o my-3">
+              <img src="images/icon_fashion.png" alt="" />
+              <h5>流行髮型<br />一手掌握</h5>
+            </div>
+            <div class="col-lg-3 my-lg-o my-3">
+              <img src="images/icon_book.png" alt="" />
+              <h5>即時溝通預約</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="topic">
+      <h2 class="text-center mt-5 mb-4 position-relative">
+        熱門主題
+        <div class="underline"></div>
+      </h2>
+      <div class="container position-relative">
+        <div class="row justify-content-center position-relative">
+          <div class="col-6 col-md-3 gy-2 gy-md-0 position-relative">
+            <a href=""
+              ><img class="cover-fit" src="images/3425_14.jpg" alt=""
+            /></a>
+            <p class="topicTags poistion-absolute">油頭</p>
+          </div>
+          <div class="col-6 col-md-3 gy-2 gy-md-0 position-relative">
+            <a href=""
+              ><img class="cover-fit" src="images/9743_2.jpg" alt=""
+            /></a>
+            <p class="topicTags poistion-absolute">灰色系</p>
+          </div>
+          <div class="col-6 col-md-3 gy-2 gy-md-0 position-relative">
+            <a href=""
+              ><img class="cover-fit" src="images/22736_8.jpg" alt=""
+            /></a>
+            <p class="topicTags poistion-absolute">大捲</p>
+          </div>
+          <div class="col-6 col-md-3 gy-2 gy-md-0 position-relative">
+            <a href=""
+              ><img class="cover-fit" src="images/14366_18.jpg" alt=""
+            /></a>
+            <p class="topicTags poistion-absolute">男孩髮型</p>
+          </div>
+        </div>
+        <a class="more">more</a>
+      </div>
+    </div>
+    <div class="designer d-sm-block d-md-none">
+      <h2 class="text-center mt-5 mb-4 position-relative">
+        人氣設計師
+        <div class="underline"></div>
+      </h2>
+      <div class="container position-relative">
+        <div class="row">
+          <div class="col-6 position-relative">
+            <div class="card position-relative">
+              <a href=""><img class="" src="images/3425_14.jpg" alt="" /></a>
+              <p class="position-absolute">Angus怡龍</p>
+            </div>
+            <span class="d-block my-3">40則貼文<br />65人追蹤</span>
+          </div>
+          <div class="col-6 position-relative">
+            <div class="card">
+              <a href=""><img class="" src="images/9743_2.jpg" alt="" /></a>
+              <p class="position-absolute">lan Chao</p>
+            </div>
+            <span class="d-block my-3">88則貼文<br />172人追蹤</span>
+          </div>
+          <div class="col-6 position-relative mx-auto text-align-center">
+            <div class="card">
+              <a href=""><img class="" src="images/22736_8.jpg" alt="" /></a>
+              <p class="position-absolute">阿毛</p>
+            </div>
+            <span class="d-block my-3">33則貼文<br />87人追蹤</span>
+          </div>
+          <div class="col-6 position-relative">
+            <div class="card">
+              <a href=""><img class="" src="images/14366_18.jpg" alt="" /></a>
+              <p class="position-absolute">Ethan Chang</p>
+            </div>
+            <span class="d-block my-3">81則貼文<br />57人追蹤</span>
+          </div>
+        </div>
+        <a class="more">more</a>
+      </div>
+    </div>
+    <div class="trend">
+      <h2 class="text-center mt-5 mb-4 position-relative">
+        趨勢話題
+        <div class="underline"></div>
+      </h2>
+
+      <div class="container position-relative">
+        <div class="row gy-2 justify-content-center">
+          <div class="col-lg-4 position-relative text-white">
+            <a href=""
+              ><img class="cover-fit" src="images/128141.jpg" alt=""
+            /></a>
+            <div class="trendText">鬆感的瀏海 配上極卷的寬度！</div>
+          </div>
+          <div class="col-lg-4 position-relative text-white">
+            <a href=""
+              ><img class="cover-fit" src="images/9344.jpg" alt=""
+            /></a>
+            <div class="trendText">日系鬆鬆捲度 霧面髮色</div>
+          </div>
+          <div class="col-lg-4 position-relative text-white">
+            <a href=""
+              ><img class="cover-fit" src="images/141965.jpg" alt=""
+            /></a>
+
+            <div class="trendText">歐巴新寵，括號瀏海</div>
+          </div>
+        </div>
+        <a class="more">more</a>
+      </div>
+    </div>
+    <footer class="main-footer">
+      <div class="footerTop d-flex justify-content-center align-items-center">
+        <img class="img1" src="images/phones.png" alt="" />
+        <div class="footerToptext justify-content-start">
+          <h3 class="position-relative mb-4 d-block">
+            快速找到好髮型
+            <div class="underline"></div>
+          </h3>
+          <img src="images/btn_app_ios.png" alt="" />
+          <img src="images/btn_app_android.png" alt="" />
+          <p class="d-none d-md-block mt-2 h6 fw-lighter">
+            下載並註冊後就可以開始發表作品囉！
+          </p>
+        </div>
+      </div>
+      <div class="footerCenter">
+        <div class="footerCenter-mask">
+          <div class="footerCenter-bg"></div>
+          <div
+            class="
+              footerCenter-bg-text
+              d-md-flex
+              justify-content-around
+              text-white text-center
+            "
+          >
+            <div>
+              <p class="fw-lighter pt-3 pt-md-0 mt-md-3">已有</p>
+              <p class="display-3 font-weight-bold">635</p>
+              <p class="fw-lighter">位設計師</p>
+            </div>
+            <div class="footerCenterDivider d-none d-md-block"></div>
+            <div>
+              <p class="fw-lighter mt-3">發表</p>
+              <p class="display-3 font-weight-bold">6421</p>
+              <p class="fw-lighter">張髮型作品</p>
+            </div>
+          </div>
+          <div
+            class="
+              footerCenter-bg-bottom
+              d-md-flex
+              justify-content-center
+              align-content-center
+              mt-4
+              pb-4
+            "
+          >
+            <div
+              class="
+                text-white
+                mb-4
+                my-md-auto
+                fw-lighter
+                h3
+                position-relative
+                d-flex-0 d-md-flex
+              "
+            >
+              優秀設計師募集中
+              <div class="underline bg-white"></div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="footerCenter-bg-bottomBt rounded-3">了解更多</div>
+              <div class="footerCenter-bg-bottomBt rounded-3">立即免費註冊</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footerBottom">
+        <div class="container">
+          <div class="row mt-4 pb-4 justify-content-center align-items-start">
+            <div class="col-lg-5 d-flex align-content-start">
+              <img src="images/logo_icon_g.svg" alt="" />
+              <p>
+                HairMap美髮地圖團隊致力於打造出最貼心實用的美髮資訊交流社群，讓美髮時光成為每個人生命中的美好時刻
+              </p>
+            </div>
+            <div class="col-lg-3 d-flex flex-wrap justify-content-start">
+              <div class="col-6">
+                <img class="ft-icon" src="images/email.svg" alt="" />
+                聯絡我們
+              </div>
+              <div class="col-6">
+                <img class="ft-icon" src="images/email.svg" alt="" />
+                ios
+              </div>
+              <div class="col-6">
+                <img class="ft-icon" src="images/email.svg" alt="" />
+                粉絲專頁
+              </div>
+              <div class="col-6">
+                <img class="ft-icon" src="images/email.svg" alt="" />
+                Android
+              </div>
+            </div>
+            <div class="col-lg-3 align-self-md-start">
+              <div class="ftRight-icon">
+                <i class="fas fa-users"></i>
+                設計師加入
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="py-3 text-center border-top border-light">
+          Hairdodo Inc. &copy; 2016. All Rights Reserved使用者絛款與隱私權政策
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
