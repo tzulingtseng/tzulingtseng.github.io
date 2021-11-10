@@ -17,7 +17,7 @@
 [GitHub 程式碼](https://github.com/tzulingtseng/tzulingtseng.github.io/blob/main/portfolio/template-find-mountain/outfit/outfit.html) |
 [GitHub React.js + Node.js 程式碼](https://github.com/tzulingtseng/find-mountain)
 
-![](https://i.imgur.com/j16TY2h.png)
+![](https://i.imgur.com/GZtET4f.jpg)
 
 ### 2.後台
 
