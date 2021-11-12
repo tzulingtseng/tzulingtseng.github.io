@@ -27,8 +27,6 @@
 
 ![](https://i.imgur.com/r4mQZ22.png)
 
----
-
 ## 全螢幕滾動網頁切版
 
 ---
@@ -40,8 +38,6 @@
 [GitHub 程式碼](https://github.com/tzulingtseng/tzulingtseng.github.io/tree/main/portfolio/template-fullpage)
 ![](https://i.imgur.com/QhNGpsQ.jpg)
 
----
-
 ## Bootstrap 框架切版
 
 ---
@@ -52,8 +48,6 @@
 [GitHub 程式碼](https://github.com/tzulingtseng/tzulingtseng.github.io/tree/main/portfolio/template-hairmap)
 
 ![](https://i.imgur.com/kOMBB2K.png)
-
----
 
 ## Todo List
 
