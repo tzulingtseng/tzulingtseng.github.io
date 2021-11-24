@@ -89,7 +89,7 @@ function handleDrop(e) {
   return false;
 }
 function saveData() {
-  console.log("selectedImgs save", selectedImgs);
+  // console.log("selectedImgs save", selectedImgs);
   for (let i = 0; i < selectedImgs.length; i++) {
     let productId = document.getElementById(selectedImgs[i]).id;
     let productPicUrl = document
