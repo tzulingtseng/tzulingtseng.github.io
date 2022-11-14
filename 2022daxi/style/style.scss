@@ -15,11 +15,15 @@ li {
 }
 $white: #ffffff;
 $black: #000000;
+.overflow-hidden {
+  overflow: hidden;
+}
 #site-root {
   font-family: HelveticaNeue, Helvetica Neue, helvetica, Sans-Serif;
   max-width: 959px;
   margin: 0 auto;
   text-align: center;
+  overflow-x: hidden;
   .title {
     &_sub {
       font-size: 16px;
@@ -173,7 +177,30 @@ $black: #000000;
           //   transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
         }
       }
-      &_content {
+      // &_content {
+      //   background: rgba(51, 49, 49, 0.6);
+      //   position: absolute;
+      //   top: 0;
+      //   width: 100vw;
+      //   height: 100vh;
+      //   text-align: center;
+      //   transition: 0.8s ease;
+      //   text-align: right;
+      //   display: flex;
+      //   justify-content: end;
+      //   font-size: 16px;
+      // }
+      // &_content.show {
+      //   opacity: 1;
+      //   left: 0%;
+      // }
+      // &_content.hide {
+      //   opacity: 0;
+      //   left: 100%;
+      //   display: none;
+      // }
+      &_content::before {
+        content: "";
         background: rgba(51, 49, 49, 0.6);
         position: absolute;
         top: 0;
@@ -184,26 +211,28 @@ $black: #000000;
         text-align: right;
         display: flex;
         justify-content: end;
-        font-size: 16px;
+        transition: 0.8s ease;
       }
-      &_content.show {
-        opacity: 1;
-        left: 0%;
-      }
-      &_content.hide {
+      &_content.hide,
+      &_content::before {
         opacity: 0;
-        left: 100%;
+      }
+      &_content.show,
+      &_content::before {
+        opacity: 1;
       }
       &_wrapper {
         background-color: $white;
-        width: 45vh;
+        width: 80vw;
         height: 100vh;
         display: flex;
         justify-content: end;
         align-items: center;
         position: absolute;
         top: 0;
+        right: 0;
         transition: 0.8s ease;
+        font-size: 16px;
         ul {
           margin-bottom: 80px;
           margin-right: 20px;
@@ -214,11 +243,11 @@ $black: #000000;
       }
       &_wrapper.show {
         opacity: 1;
-        left: 0%;
+        right: 0%;
       }
       &_wrapper.hide {
         opacity: 0;
-        left: 100%;
+        right: -80%;
       }
     }
   }
