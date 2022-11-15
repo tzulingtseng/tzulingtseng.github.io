@@ -17,7 +17,7 @@
         <ul>
           <li>首頁</li>
           <li><a href="#newest">最新消息</a></li>
-          <li><a href="#newest">系列活動</a></li>
+          <li><a href="#series">系列活動</a></li>
           <li><a href="#newest">活動資訊</a></li>
           <li><a href="#newest">交通資訊</a></li>
           <li><a href="#newest">周邊景點</a></li>
@@ -25,11 +25,13 @@
         </ul>
       </div>
       <div class="nav_mb">
-        <div class="hamburger-menu">
-          <div class="bar"></div>
+        <div class="hamburger-wrapper">
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+          </div>
         </div>
-        <div class="nav_mb_content hide">
-          <div class="nav_mb_wrapper hide">
+        <div class="nav_mb_wrapper">
+          <div class="nav_mb_content hide">
             <ul>
               <li>首頁</li>
               <li><a href="#newest">最新消息</a></li>
@@ -64,6 +66,7 @@
         </div>
       </div>
       <div class="series">
+        <div class="anchor" id="series"></div>
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
@@ -238,9 +241,25 @@
         $('body').toggleClass('overflow-hidden');
         $('.bar').toggleClass('animate');
         $('.nav_mb_content').toggleClass('hide show');
-        $('.nav_mb_wrapper').toggleClass('hide show');
+        $('.nav_mb_wrapper').toggleClass(' show');
+      })
+      function smoothScrollingTo(target) {
+        $("html,body").animate({
+          scrollTop: $(target).offset().top
+        }, 500)
+      }
+      $("a[href*=\\#]").on("click", function (event) {
+        event.preventDefault();
+        smoothScrollingTo(this.hash)
       })
     })();
+    // let hash = window.location.hash;
+    // let faqPos = $(hash).offset().top;
+    // $("html").animate({
+    //   scrollTop: faqPos
+    // }, 700);
+
+
   </script>
 </body>
 
