@@ -7,36 +7,41 @@
   <title>🎰 百家樂雙方法分析工具 v4.0</title>
   <style>
     :root {
-      --bg: #06080d;
-      --surface: #0d1119;
-      --surface-2: #121826;
-      --surface-3: #171f31;
-      --border: rgba(255, 255, 255, 0.08);
+      --bg: #030507;
+      --surface: #080b10;
+      --surface-2: #0d1117;
+      --surface-3: #11161d;
+      --card: #0b0f14;
+      --card-2: #0f141b;
+      --border: rgba(255, 255, 255, 0.05);
       --text: #f4f7fb;
-      --muted: #8f9bb3;
-      --player: #4f8cff;
-      --player-soft: rgba(79, 140, 255, 0.16);
-      --banker: #ff5a66;
-      --banker-soft: rgba(255, 90, 102, 0.16);
-      --tie: #9aa4b2;
-      --tie-soft: rgba(154, 164, 178, 0.16);
-      --success: #2fd07d;
-      --success-soft: rgba(47, 208, 125, 0.16);
+      --muted: #7f8a99;
+      --player: #5a8fff;
+      --player-soft: rgba(90, 143, 255, 0.18);
+      --banker: #ff5c6c;
+      --banker-soft: rgba(255, 92, 108, 0.18);
+      --tie: #a4acb7;
+      --tie-soft: rgba(164, 172, 183, 0.16);
+      --success: #27d96f;
+      --success-soft: rgba(39, 217, 111, 0.16);
       --warning: #ffb648;
       --warning-soft: rgba(255, 182, 72, 0.16);
-      --shadow: 0 16px 32px rgba(0, 0, 0, 0.32);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
       --radius-xl: 24px;
       --radius-lg: 18px;
       --radius-md: 14px;
+      --radius-sm: 12px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       background:
-        radial-gradient(circle at top, rgba(79, 140, 255, 0.08), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(255, 90, 102, 0.08), transparent 28%),
+        radial-gradient(circle at top, rgba(90, 143, 255, 0.05), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255, 92, 108, 0.05), transparent 24%),
         var(--bg);
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
@@ -69,13 +74,13 @@
       border-radius: 999px;
       border: 1px solid var(--border);
       color: var(--muted);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       font-size: 13px;
       white-space: nowrap;
     }
 
     .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.012));
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
@@ -134,7 +139,7 @@
     .method-card,
     .summary-card,
     .history-card {
-      background: rgba(255, 255, 255, 0.025);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
     }
@@ -162,7 +167,9 @@
       font-size: 15px;
       outline: none;
       appearance: none;
-      background-image: linear-gradient(45deg, transparent 50%, #9fb2d6 50%), linear-gradient(135deg, #9fb2d6 50%, transparent 50%);
+      background-image:
+        linear-gradient(45deg, transparent 50%, #9fb2d6 50%),
+        linear-gradient(135deg, #9fb2d6 50%, transparent 50%);
       background-position: calc(100% - 18px) 18px, calc(100% - 12px) 18px;
       background-size: 6px 6px, 6px 6px;
       background-repeat: no-repeat;
@@ -183,7 +190,9 @@
       transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
-    button:hover { transform: translateY(-1px); }
+    button:hover {
+      transform: translateY(-1px);
+    }
 
     .btn-primary {
       background: linear-gradient(180deg, #4a7eff, #2d5fda);
@@ -192,7 +201,7 @@
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.04);
+      background: rgba(255, 255, 255, 0.04);
       color: var(--text);
       border: 1px solid var(--border);
       flex: 1;
@@ -225,7 +234,7 @@
 
     .metric-card {
       padding: 16px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       min-height: 108px;
     }
 
@@ -249,9 +258,17 @@
       margin-top: 6px;
     }
 
-    .positive { color: var(--player); }
-    .negative { color: var(--banker); }
-    .warning { color: var(--warning); }
+    .positive {
+      color: var(--player);
+    }
+
+    .negative {
+      color: var(--banker);
+    }
+
+    .warning {
+      color: var(--warning);
+    }
 
     .recommend-bar {
       display: flex;
@@ -328,7 +345,7 @@
     }
 
     .method-mini {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
@@ -363,7 +380,7 @@
     .history-stat-card {
       padding: 16px;
       border-radius: var(--radius-lg);
-      background: rgba(255,255,255,0.025);
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid var(--border);
     }
 
@@ -379,70 +396,150 @@
     }
 
     .history-list {
-      max-height: 520px;
+      max-height: 620px;
       overflow-y: auto;
-      padding-right: 4px;
+      padding-right: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .history-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .history-list::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 999px;
+    }
+
+    .history-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
     }
 
     .history-card {
-      padding: 18px;
-      margin-bottom: 12px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      padding: 18px 18px 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 20px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
     }
 
     .history-card-top {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 14px;
     }
 
     .history-index {
-      font-size: 14px;
-      color: var(--muted);
-      font-weight: 700;
+      font-size: 26px;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.18);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .history-result-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 108px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.03em;
+      border: 1px solid transparent;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .history-result-badge.player {
+      color: var(--player);
+      background: rgba(90, 143, 255, 0.14);
+      border-color: rgba(90, 143, 255, 0.22);
+    }
+
+    .history-result-badge.banker {
+      color: var(--banker);
+      background: rgba(255, 92, 108, 0.14);
+      border-color: rgba(255, 92, 108, 0.22);
+    }
+
+    .history-result-badge.tie {
+      color: var(--tie);
+      background: rgba(164, 172, 183, 0.12);
+      border-color: rgba(164, 172, 183, 0.2);
     }
 
     .history-methods {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
+      display: block;
     }
 
     .method-records {
-      display: grid;
-      gap: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
     }
 
     .method-record {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 15px;
+      font-size: 18px;
+      min-height: 30px;
+      flex: 1;
     }
 
     .method-code {
-      width: 52px;
-      flex: 0 0 52px;
-      color: var(--muted);
-      font-weight: 800;
+      color: #d8dde6;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
     }
 
     .method-predict {
-      font-weight: 800;
+      font-weight: 700;
+      color: #f5f7fb;
+      white-space: nowrap;
+    }
+
+    .method-predict.player {
+      color: #dfe9ff;
+    }
+
+    .method-predict.banker {
+      color: #ffe2e6;
+    }
+
+    .method-predict.tie {
+      color: #dde2e8;
     }
 
     .method-status {
-      min-width: 36px;
-      text-align: center;
-      font-weight: 800;
+      font-weight: 900;
+      font-size: 20px;
+      line-height: 1;
+      white-space: nowrap;
+      text-align: right;
     }
 
-    .status-ok { color: var(--success); }
-    .status-fail { color: var(--banker); }
-    .status-tie { color: var(--tie); }
+    .status-ok {
+      color: var(--success);
+    }
+
+    .status-fail {
+      color: var(--banker);
+    }
+
+    .status-tie {
+      color: var(--tie);
+    }
 
     .history-footer {
       display: flex;
@@ -450,10 +547,10 @@
       justify-content: space-between;
       gap: 10px;
       margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .pattern-box {
@@ -466,7 +563,7 @@
 
     .result-button-group .btn-result {
       flex: 1;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text);
       border: 1px solid var(--border);
     }
@@ -489,9 +586,12 @@
       border-color: rgba(154, 164, 178, 0.35);
     }
 
-    .hidden { display: none !important; }
+    .hidden {
+      display: none !important;
+    }
 
     @media (max-width: 860px) {
+
       .results-grid,
       .history-stats {
         grid-template-columns: 1fr;
@@ -504,30 +604,78 @@
     }
 
     @media (max-width: 640px) {
-      body { padding: 14px; }
-      h1 { font-size: 28px; }
+      body {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
       .header {
         align-items: flex-start;
         flex-direction: column;
       }
-      .panel-body { padding: 16px; }
+
+      .panel-body {
+        padding: 16px;
+      }
+
       .summary-grid,
       .method-grid,
-      .history-stats,
-      .history-methods {
+      .history-stats {
         grid-template-columns: 1fr;
       }
+
       .recommend-bar {
         flex-direction: column;
         align-items: stretch;
       }
-      .recommend-big { font-size: 40px; }
-      .pill { width: 100%; }
+
+      .recommend-big {
+        font-size: 40px;
+      }
+
+      .pill {
+        width: 100%;
+      }
+
       .card-input-group {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
       }
-      .input-card { padding: 12px; }
+
+      .input-card {
+        padding: 12px;
+      }
+
+      .history-card {
+        padding: 16px 14px 14px;
+        border-radius: 18px;
+      }
+
+      .history-index {
+        font-size: 22px;
+      }
+
+      .history-result-badge {
+        min-width: 96px;
+        font-size: 12px;
+        padding: 7px 12px;
+      }
+
+      .method-records {
+        gap: 14px;
+      }
+
+      .method-record {
+        font-size: 16px;
+      }
+
+      .history-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
@@ -756,18 +904,22 @@
       const totalPatterns = Object.keys(patternDatabase).length;
       let totalRecords = 0;
       let correctRecords = 0;
+
       Object.values(patternDatabase).forEach(records => {
         totalRecords += records.length;
         correctRecords += records.filter(r => r.mainCorrect === true).length;
       });
+
       document.getElementById('totalPatterns').textContent = totalPatterns;
       document.getElementById('totalRecords').textContent = totalRecords;
-      document.getElementById('totalWinRate').textContent = totalRecords > 0 ? `${((correctRecords / totalRecords) * 100).toFixed(1)}%` : '-';
+      document.getElementById('totalWinRate').textContent =
+        totalRecords > 0 ? `${((correctRecords / totalRecords) * 100).toFixed(1)}%` : '-';
     }
 
     function showPatternHistory(patternKey) {
       const section = document.getElementById('patternHistorySection');
       const records = patternDatabase[patternKey] || [];
+
       if (!records.length) {
         section.innerHTML = '<div style="color:var(--muted);">此牌型暫無歷史紀錄</div>';
       } else {
@@ -775,6 +927,7 @@
         const bankerWins = records.filter(r => r.result === '開莊').length;
         const tieWins = records.filter(r => r.result === '開和').length;
         const mainCorrect = records.filter(r => r.mainCorrect === true).length;
+
         section.innerHTML = `
           <div style="font-weight:800;margin-bottom:8px;">牌型：${patternKey}</div>
           <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;">
@@ -786,6 +939,7 @@
           <div style="margin-top:12px;color:var(--muted);">M 方法歷史準確率：<span style="color:var(--text);font-weight:800;">${Math.round((mainCorrect / records.length) * 100)}%</span></div>
         `;
       }
+
       section.classList.remove('hidden');
     }
 
@@ -800,6 +954,12 @@
       return 'TIE';
     }
 
+    function chineseLabelFromEnglish(label) {
+      if (label === 'PLAYER') return '閒';
+      if (label === 'BANKER') return '莊';
+      return '和';
+    }
+
     function setPill(el, type, label) {
       el.className = `pill ${type}`;
       el.textContent = label;
@@ -807,6 +967,7 @@
 
     function calculateBaccarat() {
       const [player1Val, player2Val, player3Val, banker1Val, banker2Val, banker3Val] = getValues();
+
       if (!player1Val || !player2Val || !banker1Val || !banker2Val) {
         alert('請至少輸入閒家和莊家的前兩張牌');
         return;
@@ -821,8 +982,10 @@
 
       const playerTotal = player1 + player2 + player3;
       const bankerTotal = banker1 + banker2 + banker3;
+
       const selectedCards = [player1Val, player2Val, player3Val, banker1Val, banker2Val, banker3Val]
         .map(v => v === '' ? null : parseInt(v));
+
       const publicCardCount = selectedCards.filter(card => card === 0).length;
 
       const baseDiff = playerTotal - bankerTotal;
@@ -834,6 +997,7 @@
 
       currentMainRecommendation = finalResult > 0 ? '投注閒家' : '投注莊家';
       currentPatternKey = generatePatternKey();
+
       showPatternHistory(currentPatternKey);
 
       document.getElementById('publicCards').textContent = `${publicCardCount} 張`;
@@ -857,6 +1021,7 @@
 
     function calculateRoadmapPrediction(p1, p2, p3, b1, b2, b3) {
       const getTailNumber = (num) => num === 0 ? 0 : num % 10;
+
       const playerTail = (getTailNumber(p1) + getTailNumber(p2) + getTailNumber(p3)) % 10;
       const bankerTail = (getTailNumber(b1) + getTailNumber(b2) + getTailNumber(b3)) % 10;
       const tailSum = playerTail + bankerTail;
@@ -872,6 +1037,7 @@
 
       let finalPrediction = initialPrediction;
       let adjustmentInfo = `${totalCards}張 → 不調整`;
+
       if (totalCards >= 5 && totalCards <= 6 && initialPrediction !== '下一局開和') {
         finalPrediction = initialPrediction === '下一局開閒' ? '下一局開莊' : '下一局開閒';
         adjustmentInfo = `${totalCards}張有補牌 → 反轉`;
@@ -885,12 +1051,15 @@
       }
 
       currentRoadmapRecommendation = finalPrediction;
+
       document.getElementById('tailSumValue').textContent = `${tailSum}`;
       document.getElementById('tailSumDisplay').textContent = `P:${playerTail} ｜ B:${bankerTail}`;
       document.getElementById('roadmapMiniBadge').textContent = `Initial: ${labelFromRecommendation(initialPrediction)}`;
       document.getElementById('adjustmentInfoDisplay').textContent = adjustmentInfo;
       document.getElementById('finalRoadmapPredictionText').textContent = labelFromRecommendation(finalPrediction);
-      document.getElementById('finalRoadmapPredictionText').className = 'method-mini-value ' + (finalPrediction === '下一局開閒' ? 'positive' : finalPrediction === '下一局開莊' ? 'negative' : '');
+      document.getElementById('finalRoadmapPredictionText').className =
+        'method-mini-value ' +
+        (finalPrediction === '下一局開閒' ? 'positive' : finalPrediction === '下一局開莊' ? 'negative' : '');
 
       setPill(
         document.getElementById('methodRPill'),
@@ -904,14 +1073,22 @@
       ['resultPlayer', 'resultBanker', 'resultTie'].forEach(id => {
         document.getElementById(id).classList.remove('active');
       });
-      document.getElementById(type === 'player' ? 'resultPlayer' : type === 'banker' ? 'resultBanker' : 'resultTie').classList.add('active');
+
+      document.getElementById(
+        type === 'player' ? 'resultPlayer' : type === 'banker' ? 'resultBanker' : 'resultTie'
+      ).classList.add('active');
     }
 
     function checkMethodResult(predictionLabel, actual) {
       if (actual === 'tie') return { status: 'tie', text: '和' };
-      if ((predictionLabel === 'PLAYER' && actual === 'player') || (predictionLabel === 'BANKER' && actual === 'banker')) {
+
+      if (
+        (predictionLabel === 'PLAYER' && actual === 'player') ||
+        (predictionLabel === 'BANKER' && actual === 'banker')
+      ) {
         return { status: 'ok', text: '準' };
       }
+
       return { status: 'fail', text: 'X' };
     }
 
@@ -921,7 +1098,10 @@
         return;
       }
 
-      const actualResultText = currentSelectedResult === 'player' ? '開閒' : currentSelectedResult === 'banker' ? '開莊' : '開和';
+      const actualResultText =
+        currentSelectedResult === 'player' ? '開閒' :
+        currentSelectedResult === 'banker' ? '開莊' : '開和';
+
       const mLabel = labelFromRecommendation(currentMainRecommendation);
       const rLabel = labelFromRecommendation(currentRoadmapRecommendation);
       const mCheck = checkMethodResult(mLabel, currentSelectedResult);
@@ -948,14 +1128,16 @@
 
       if (!patternDatabase[currentPatternKey]) patternDatabase[currentPatternKey] = [];
       patternDatabase[currentPatternKey].push(record);
-      savePatternDatabase();
 
+      savePatternDatabase();
       updateHistoryDisplay();
       updateStatistics();
       resetForm();
+
       document.getElementById('feedbackSection').classList.add('hidden');
       document.getElementById('results').classList.add('hidden');
       document.getElementById('patternHistorySection').classList.add('hidden');
+
       currentMainRecommendation = '';
       currentRoadmapRecommendation = '';
     }
@@ -968,6 +1150,7 @@
 
     function updateHistoryDisplay() {
       const historyList = document.getElementById('historyList');
+
       document.getElementById('gameCount').textContent = `(${gameHistory.length})`;
       document.getElementById('totalGamesDisplay').textContent = gameHistory.length;
 
@@ -987,26 +1170,24 @@
           <div class="history-card">
             <div class="history-card-top">
               <div class="history-index">#${game.game}</div>
-              <div class="pill ${resultTypeClass}" style="min-width:110px;padding:10px 14px;">${resultLabel}</div>
+              <div class="history-result-badge ${resultTypeClass}">${resultLabel}</div>
             </div>
+
             <div class="history-methods">
               <div class="method-records">
                 <div class="method-record">
-                  <span class="method-code">M（主）</span>
-                  <span class="method-predict ${game.mainLabel === 'PLAYER' ? 'positive' : game.mainLabel === 'BANKER' ? 'negative' : ''}">${game.mainLabel}</span>
+                  <span class="method-code">M（${chineseLabelFromEnglish(game.mainLabel)}）</span>
                   <span class="method-status ${mStatusClass}">${game.mainStatusText}</span>
                 </div>
                 <div class="method-record">
-                  <span class="method-code">R（跑）</span>
-                  <span class="method-predict ${game.roadmapLabel === 'PLAYER' ? 'positive' : game.roadmapLabel === 'BANKER' ? 'negative' : ''}">${game.roadmapLabel}</span>
+                  <span class="method-code">R（${chineseLabelFromEnglish(game.roadmapLabel)}）</span>
                   <span class="method-status ${rStatusClass}">${game.roadmapStatusText}</span>
                 </div>
               </div>
-              <div style="text-align:right;color:var(--muted);font-size:12px;">結果：${game.result}</div>
             </div>
+
             <div class="history-footer">
               <span>${game.patternKey}</span>
-              <span>${timeStr}</span>
             </div>
           </div>
         `;
@@ -1020,7 +1201,6 @@
       const mCorrect = gameHistory.filter(g => g.mainCorrect === true).length;
       const rCorrect = gameHistory.filter(g => g.roadmapCorrect === true).length;
       const mFail = gameHistory.filter(g => g.mainCorrect === false).length;
-      const rFail = gameHistory.filter(g => g.roadmapCorrect === false).length;
 
       document.getElementById('accuracyDisplayM').textContent = mTotal ? `${((mCorrect / mTotal) * 100).toFixed(1)}%` : '-';
       document.getElementById('accuracyDisplayR').textContent = rTotal ? `${((rCorrect / rTotal) * 100).toFixed(1)}%` : '-';
@@ -1035,6 +1215,7 @@
       }
 
       let csv = '局數,牌型,M方法,R方法,實際結果,M是否正確,R是否正確,時間\n';
+
       gameHistory.forEach(game => {
         const timeStr = game.timestamp ? new Date(game.timestamp).toLocaleString('zh-TW') : '-';
         const mState = game.mainCorrect === null ? '和局' : game.mainCorrect ? '正確' : '失敗';
@@ -1055,12 +1236,16 @@
         alert('暫無數據可分析');
         return;
       }
+
       const ties = gameHistory.filter(g => g.actual === 'tie').length;
       const mCorrect = gameHistory.filter(g => g.mainCorrect === true).length;
       const rCorrect = gameHistory.filter(g => g.roadmapCorrect === true).length;
       const mCount = gameHistory.filter(g => g.mainCorrect !== null).length;
       const rCount = gameHistory.filter(g => g.roadmapCorrect !== null).length;
-      alert(`📊 雙方法分析\n總局數: ${gameHistory.length}\n和局: ${ties}\n\nM 方法準確率: ${mCount ? ((mCorrect / mCount) * 100).toFixed(1) : '-'}%\nR 方法準確率: ${rCount ? ((rCorrect / rCount) * 100).toFixed(1) : '-'}%`);
+
+      alert(
+        `📊 雙方法分析\n總局數: ${gameHistory.length}\n和局: ${ties}\n\nM 方法準確率: ${mCount ? ((mCorrect / mCount) * 100).toFixed(1) : '-'}%\nR 方法準確率: ${rCount ? ((rCorrect / rCount) * 100).toFixed(1) : '-'}%`
+      );
     }
 
     function importDataBatch() {
@@ -1068,18 +1253,21 @@
       if (!input) return;
 
       let count = 0;
+
       input.trim().split('\n').forEach(line => {
         const [m, r, result] = line.split(',').map(v => v.trim());
         if (!m || !r || !result) return;
+
         const actual = result === '開閒' ? 'player' : result === '開莊' ? 'banker' : 'tie';
         const mCheck = checkMethodResult(m, actual);
         const rCheck = checkMethodResult(r, actual);
+
         gameHistory.push({
           game: gameHistory.length + 1,
           patternKey: '-',
           mainRecommendation: m === 'PLAYER' ? '投注閒家' : '投注莊家',
           mainLabel: m,
-          roadmapRecommendation: r === 'PLAYER' ? '下一局開閒' : '下一局開莊',
+          roadmapRecommendation: r === 'PLAYER' ? '下一局開閒' : r === 'BANKER' ? '下一局開莊' : '下一局開和',
           roadmapLabel: r,
           result,
           actual,
@@ -1089,6 +1277,7 @@
           roadmapStatusText: rCheck.text,
           timestamp: Date.now()
         });
+
         count += 1;
       });
 
@@ -1100,27 +1289,35 @@
     }
 
     function showTopPatterns() {
-      const sorted = Object.entries(patternDatabase).sort(([, a], [, b]) => b.length - a.length).slice(0, 10);
+      const sorted = Object.entries(patternDatabase)
+        .sort(([, a], [, b]) => b.length - a.length)
+        .slice(0, 10);
+
       if (!sorted.length) {
         alert('暫無牌型資料');
         return;
       }
+
       let text = 'Top 10 牌局\n\n';
+
       sorted.forEach(([key, records]) => {
         const playerWins = records.filter(r => r.result === '開閒').length;
         const bankerWins = records.filter(r => r.result === '開莊').length;
         const tieWins = records.filter(r => r.result === '開和').length;
         text += `${key}｜${records.length}次｜閒:${playerWins} 莊:${bankerWins} 和:${tieWins}\n`;
       });
+
       alert(text);
     }
 
     function clearAllData() {
       if (!confirm('確定清除所有紀錄？')) return;
       if (!confirm('再次確認，會清除雙方法紀錄與牌型資料庫')) return;
+
       gameHistory = [];
       patternDatabase = {};
       localStorage.removeItem('baccaratPatternsDual');
+
       updateHistoryDisplay();
       updateStatistics();
       updateDatabaseInfo();
