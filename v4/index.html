@@ -194,6 +194,12 @@
       transform: translateY(-1px);
     }
 
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
     .btn-primary {
       background: linear-gradient(180deg, #4a7eff, #2d5fda);
       color: #fff;
@@ -734,7 +740,7 @@
     <div id="results" class="hidden">
       <div class="panel">
         <div class="panel-body">
-          <div class="results-grid" style="display: none;">
+          <div class="results-grid">
             <div class="summary-card">
               <div class="panel-title">本局方法 M</div>
               <div class="summary-grid">
@@ -837,6 +843,7 @@
         </div>
 
         <div class="button-group" style="margin-top: 16px;">
+          <button id="undoLastBtn" class="btn-secondary" onclick="undoLastStep()" disabled>↩️ 回上一步</button>
           <button class="btn-secondary" onclick="clearAllData()">🗑️ 清除所有紀錄</button>
         </div>
       </div>
@@ -878,6 +885,7 @@
       updateDatabaseInfo();
       updateStatistics();
       setResultSelection('player');
+      updateUndoButtonState();
     });
 
     function generatePatternKey() {
@@ -1148,6 +1156,52 @@
       });
     }
 
+    function updateUndoButtonState() {
+      const btn = document.getElementById('undoLastBtn');
+      if (!btn) return;
+      btn.disabled = gameHistory.length === 0;
+    }
+
+    function undoLastStep() {
+      if (!gameHistory.length) {
+        alert('目前沒有可刪除的紀錄');
+        return;
+      }
+
+      const lastRecord = gameHistory.pop();
+
+      if (lastRecord.patternKey && patternDatabase[lastRecord.patternKey]) {
+        const records = patternDatabase[lastRecord.patternKey];
+        const targetIndex = records.findIndex(r => r.timestamp === lastRecord.timestamp);
+
+        if (targetIndex !== -1) {
+          records.splice(targetIndex, 1);
+        }
+
+        if (!records.length) {
+          delete patternDatabase[lastRecord.patternKey];
+        }
+      }
+
+      savePatternDatabase();
+      updateHistoryDisplay();
+      updateStatistics();
+      updateDatabaseInfo();
+
+      document.getElementById('results').classList.add('hidden');
+      document.getElementById('feedbackSection').classList.add('hidden');
+      document.getElementById('patternHistorySection').classList.add('hidden');
+
+      currentMainRecommendation = '';
+      currentRoadmapRecommendation = '';
+      currentPatternKey = '';
+
+      resetForm();
+      setResultSelection('player');
+
+      alert('已刪除最後一筆紀錄');
+    }
+
     function updateHistoryDisplay() {
       const historyList = document.getElementById('historyList');
 
@@ -1156,6 +1210,7 @@
 
       if (!gameHistory.length) {
         historyList.innerHTML = '<div style="text-align:center;color:var(--muted);padding:26px 0;">還無紀錄</div>';
+        updateUndoButtonState();
         return;
       }
 
@@ -1164,7 +1219,6 @@
         const resultLabel = game.actual === 'player' ? 'PLAYER' : game.actual === 'banker' ? 'BANKER' : 'TIE';
         const mStatusClass = game.mainCorrect === true ? 'status-ok' : game.mainCorrect === false ? 'status-fail' : 'status-tie';
         const rStatusClass = game.roadmapCorrect === true ? 'status-ok' : game.roadmapCorrect === false ? 'status-fail' : 'status-tie';
-        const timeStr = game.timestamp ? new Date(game.timestamp).toLocaleString('zh-TW') : '-';
 
         return `
           <div class="history-card">
@@ -1192,6 +1246,8 @@
           </div>
         `;
       }).join('');
+
+      updateUndoButtonState();
     }
 
     function updateStatistics() {
@@ -1321,6 +1377,16 @@
       updateHistoryDisplay();
       updateStatistics();
       updateDatabaseInfo();
+      resetForm();
+
+      document.getElementById('results').classList.add('hidden');
+      document.getElementById('feedbackSection').classList.add('hidden');
+      document.getElementById('patternHistorySection').classList.add('hidden');
+
+      currentMainRecommendation = '';
+      currentRoadmapRecommendation = '';
+      currentPatternKey = '';
+      setResultSelection('player');
     }
 
     document.addEventListener('keypress', event => {
