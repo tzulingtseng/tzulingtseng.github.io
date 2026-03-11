@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎰 百家樂雙方法分析工具 v4.0</title>
+  <style>
+    :root {
+      --bg: #06080d;
+      --surface: #0d1119;
+      --surface-2: #121826;
+      --surface-3: #171f31;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f4f7fb;
+      --muted: #8f9bb3;
+      --player: #4f8cff;
+      --player-soft: rgba(79, 140, 255, 0.16);
+      --banker: #ff5a66;
+      --banker-soft: rgba(255, 90, 102, 0.16);
+      --tie: #9aa4b2;
+      --tie-soft: rgba(154, 164, 178, 0.16);
+      --success: #2fd07d;
+      --success-soft: rgba(47, 208, 125, 0.16);
+      --warning: #ffb648;
+      --warning-soft: rgba(255, 182, 72, 0.16);
+      --shadow: 0 16px 32px rgba(0, 0, 0, 0.32);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(79, 140, 255, 0.08), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255, 90, 102, 0.08), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+      line-height: 1.55;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: 0.04em;
+      font-weight: 800;
+    }
+
+    .header-badge {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .panel-body {
+      padding: 22px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .panel-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--warning);
+      box-shadow: 0 0 10px rgba(255, 182, 72, 0.55);
+    }
+
+    .database-actions,
+    .button-group,
+    .result-button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-input-group {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .input-card,
+    .metric-card,
+    .method-card,
+    .summary-card,
+    .history-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .input-card {
+      padding: 16px;
+    }
+
+    .input-card label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .card-select {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 15px;
+      outline: none;
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, #9fb2d6 50%), linear-gradient(135deg, #9fb2d6 50%, transparent 50%);
+      background-position: calc(100% - 18px) 18px, calc(100% - 12px) 18px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    .card-select:focus {
+      border-color: rgba(79, 140, 255, 0.65);
+      box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.15);
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #4a7eff, #2d5fda);
+      color: #fff;
+      flex: 1;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border: 1px solid var(--border);
+      flex: 1;
+    }
+
+    .btn-small {
+      padding: 11px 14px;
+      font-size: 13px;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+    }
+
+    .summary-card,
+    .method-card {
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric-card {
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+      min-height: 108px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .metric-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .positive { color: var(--player); }
+    .negative { color: var(--banker); }
+    .warning { color: var(--warning); }
+
+    .recommend-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .recommend-big {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 132px;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 800;
+      border: 1px solid transparent;
+    }
+
+    .pill.player {
+      color: var(--player);
+      background: var(--player-soft);
+      border-color: rgba(79, 140, 255, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(79, 140, 255, 0.12);
+    }
+
+    .pill.banker {
+      color: var(--banker);
+      background: var(--banker-soft);
+      border-color: rgba(255, 90, 102, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(255, 90, 102, 0.12);
+    }
+
+    .pill.tie {
+      color: var(--tie);
+      background: var(--tie-soft);
+      border-color: rgba(154, 164, 178, 0.35);
+    }
+
+    .method-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .method-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .method-note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .method-mini {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 92px;
+    }
+
+    .method-mini-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .method-mini-value {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .method-mini-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .history-stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .history-stat-card {
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+    }
+
+    .history-stat-card .label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .history-stat-card .value {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .history-list {
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .history-card {
+      padding: 18px;
+      margin-bottom: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    }
+
+    .history-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .history-index {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .history-methods {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .method-records {
+      display: grid;
+      gap: 10px;
+    }
+
+    .method-record {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+    }
+
+    .method-code {
+      width: 52px;
+      flex: 0 0 52px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .method-predict {
+      font-weight: 800;
+    }
+
+    .method-status {
+      min-width: 36px;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .status-ok { color: var(--success); }
+    .status-fail { color: var(--banker); }
+    .status-tie { color: var(--tie); }
+
+    .history-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pattern-box {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 182, 72, 0.08);
+      border: 1px solid rgba(255, 182, 72, 0.18);
+    }
+
+    .result-button-group .btn-result {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .result-button-group .btn-result.player.active {
+      background: var(--player-soft);
+      color: var(--player);
+      border-color: rgba(79, 140, 255, 0.35);
+    }
+
+    .result-button-group .btn-result.banker.active {
+      background: var(--banker-soft);
+      color: var(--banker);
+      border-color: rgba(255, 90, 102, 0.35);
+    }
+
+    .result-button-group .btn-result.tie.active {
+      background: var(--tie-soft);
+      color: var(--tie);
+      border-color: rgba(154, 164, 178, 0.35);
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 860px) {
+      .results-grid,
+      .history-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-grid,
+      .method-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 14px; }
+      h1 { font-size: 28px; }
+      .header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .panel-body { padding: 16px; }
+      .summary-grid,
+      .method-grid,
+      .history-stats,
+      .history-methods {
+        grid-template-columns: 1fr;
+      }
+      .recommend-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .recommend-big { font-size: 40px; }
+      .pill { width: 100%; }
+      .card-input-group {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .input-card { padding: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>BACCARAT</h1>
+      <div class="header-badge">雙方法紀錄版｜M = 本局建議｜R = 跑牌值預測</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-body">
+        <div class="panel-title">數據中心</div>
+        <div class="database-actions">
+          <button class="btn-secondary btn-small" onclick="exportToExcel()">📊 匯出 Excel</button>
+          <button class="btn-secondary btn-small" onclick="showAnalytics()">📈 分析報表</button>
+          <button class="btn-secondary btn-small" onclick="importDataBatch()">📥 批量導入</button>
+          <button class="btn-primary btn-small" onclick="showTopPatterns()">🔥 Top 牌局</button>
+        </div>
+        <div id="databaseInfo" class="method-note">
+          資料庫: <span id="totalPatterns">0</span> 牌型 ｜ <span id="totalRecords">0</span> 筆 ｜ 勝率: <span id="totalWinRate">-</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="panel-title">閒家牌</div>
+          <div class="card-input-group">
+            <div class="input-card"><label>第 1 張</label><select id="player1" class="card-select"></select></div>
+            <div class="input-card"><label>第 2 張</label><select id="player2" class="card-select"></select></div>
+            <div class="input-card"><label>第 3 張</label><select id="player3" class="card-select"></select></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body">
+          <div class="panel-title">莊家牌</div>
+          <div class="card-input-group">
+            <div class="input-card"><label>第 1 張</label><select id="banker1" class="card-select"></select></div>
+            <div class="input-card"><label>第 2 張</label><select id="banker2" class="card-select"></select></div>
+            <div class="input-card"><label>第 3 張</label><select id="banker3" class="card-select"></select></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group" style="margin-bottom: 20px;">
+      <button class="btn-primary" onclick="calculateBaccarat()">計算結果</button>
+      <button class="btn-secondary" onclick="resetForm()">清除重設</button>
+    </div>
+
+    <div id="results" class="hidden">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="results-grid">
+            <div class="summary-card">
+              <div class="panel-title">本局方法 M</div>
+              <div class="summary-grid">
+                <div class="metric-card">
+                  <div class="metric-label">公牌（10 / JQK）</div>
+                  <div class="metric-value" id="publicCards">-</div>
+                  <div class="metric-sub" id="publicType">-</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">基礎點差</div>
+                  <div class="metric-value" id="baseDiff">-</div>
+                  <div class="metric-sub" id="pointSummary">P0 ｜ B0</div>
+                </div>
+              </div>
+              <div class="recommend-bar">
+                <div>
+                  <div class="metric-label">最終結果</div>
+                  <div class="recommend-big" id="finalResult">-</div>
+                </div>
+                <div class="pill player" id="methodMPill">PLAYER</div>
+              </div>
+            </div>
+
+            <div class="method-card">
+              <div class="method-card-head">
+                <div>
+                  <div class="method-title">跑牌值｜方法 R</div>
+                  <div class="method-note">尾數和 + 調整規則</div>
+                </div>
+                <div class="method-note" id="roadmapMiniBadge">Initial: -</div>
+              </div>
+              <div class="method-grid">
+                <div class="method-mini">
+                  <div class="method-mini-label">尾數和</div>
+                  <div class="method-mini-value warning" id="tailSumValue">-</div>
+                  <div class="method-mini-sub" id="tailSumDisplay">P: - ｜ B: -</div>
+                </div>
+                <div class="method-mini">
+                  <div class="method-mini-label">調整規則</div>
+                  <div class="method-mini-value warning" style="font-size: 24px;" id="adjustmentInfoDisplay">-</div>
+                  <div class="method-mini-sub">依張數 / 高牌反轉</div>
+                </div>
+              </div>
+              <div class="recommend-bar">
+                <div>
+                  <div class="metric-label">最終預測</div>
+                  <div class="method-mini-value" id="finalRoadmapPredictionText">-</div>
+                </div>
+                <div class="pill banker" id="methodRPill">BANKER</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="patternHistorySection" class="pattern-box hidden"></div>
+
+          <div id="feedbackSection" class="hidden" style="margin-top: 20px;">
+            <div class="panel-title">牌局結果</div>
+            <div class="result-button-group">
+              <button id="resultPlayer" class="btn-result player" onclick="setResultSelection('player')">開閒 PLAYER</button>
+              <button id="resultBanker" class="btn-result banker" onclick="setResultSelection('banker')">開莊 BANKER</button>
+              <button id="resultTie" class="btn-result tie" onclick="setResultSelection('tie')">開和 TIE</button>
+            </div>
+            <div class="button-group" style="margin-top: 12px;">
+              <button class="btn-primary" onclick="recordResult()">確認記錄</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-body">
+        <div class="panel-title">雙方法牌局紀錄 <span id="gameCount">(0)</span></div>
+
+        <div class="history-stats">
+          <div class="history-stat-card">
+            <div class="label">總局數</div>
+            <div class="value" id="totalGamesDisplay">0</div>
+          </div>
+          <div class="history-stat-card">
+            <div class="label">M 準確度</div>
+            <div class="value" id="accuracyDisplayM">-</div>
+          </div>
+          <div class="history-stat-card">
+            <div class="label">R 準確度</div>
+            <div class="value" id="accuracyDisplayR">-</div>
+          </div>
+          <div class="history-stat-card">
+            <div class="label">M 準 / 失</div>
+            <div class="value" id="methodMCount">0 / 0</div>
+          </div>
+          <div class="history-stat-card">
+            <div class="label">和局</div>
+            <div class="value" id="tieCount">0</div>
+          </div>
+        </div>
+
+        <div id="historyList" class="history-list">
+          <div style="text-align:center;color:var(--muted);padding:26px 0;">還無紀錄</div>
+        </div>
+
+        <div class="button-group" style="margin-top: 16px;">
+          <button class="btn-secondary" onclick="clearAllData()">🗑️ 清除所有紀錄</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CARD_OPTIONS = `
+      <option value="">選擇</option>
+      <option value="1">A</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="0">10</option>
+      <option value="0">J</option>
+      <option value="0">Q</option>
+      <option value="0">K</option>
+    `;
+
+    let gameHistory = [];
+    let currentPatternKey = '';
+    let currentMainRecommendation = '';
+    let currentRoadmapRecommendation = '';
+    let currentSelectedResult = 'player';
+    let patternDatabase = {};
+
+    document.querySelectorAll('.card-select').forEach(select => {
+      select.innerHTML = CARD_OPTIONS;
+    });
+
+    window.addEventListener('load', () => {
+      loadPatternDatabase();
+      updateHistoryDisplay();
+      updateDatabaseInfo();
+      updateStatistics();
+      setResultSelection('player');
+    });
+
+    function generatePatternKey() {
+      const p1 = document.getElementById('player1').value || '-';
+      const p2 = document.getElementById('player2').value || '-';
+      const p3 = document.getElementById('player3').value || '-';
+      const b1 = document.getElementById('banker1').value || '-';
+      const b2 = document.getElementById('banker2').value || '-';
+      const b3 = document.getElementById('banker3').value || '-';
+      return `P:${p1}-${p2}-${p3}|B:${b1}-${b2}-${b3}`;
+    }
+
+    function loadPatternDatabase() {
+      const data = localStorage.getItem('baccaratPatternsDual');
+      if (data) patternDatabase = JSON.parse(data);
+    }
+
+    function savePatternDatabase() {
+      localStorage.setItem('baccaratPatternsDual', JSON.stringify(patternDatabase));
+      updateDatabaseInfo();
+    }
+
+    function updateDatabaseInfo() {
+      const totalPatterns = Object.keys(patternDatabase).length;
+      let totalRecords = 0;
+      let correctRecords = 0;
+      Object.values(patternDatabase).forEach(records => {
+        totalRecords += records.length;
+        correctRecords += records.filter(r => r.mainCorrect === true).length;
+      });
+      document.getElementById('totalPatterns').textContent = totalPatterns;
+      document.getElementById('totalRecords').textContent = totalRecords;
+      document.getElementById('totalWinRate').textContent = totalRecords > 0 ? `${((correctRecords / totalRecords) * 100).toFixed(1)}%` : '-';
+    }
+
+    function showPatternHistory(patternKey) {
+      const section = document.getElementById('patternHistorySection');
+      const records = patternDatabase[patternKey] || [];
+      if (!records.length) {
+        section.innerHTML = '<div style="color:var(--muted);">此牌型暫無歷史紀錄</div>';
+      } else {
+        const playerWins = records.filter(r => r.result === '開閒').length;
+        const bankerWins = records.filter(r => r.result === '開莊').length;
+        const tieWins = records.filter(r => r.result === '開和').length;
+        const mainCorrect = records.filter(r => r.mainCorrect === true).length;
+        section.innerHTML = `
+          <div style="font-weight:800;margin-bottom:8px;">牌型：${patternKey}</div>
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;">
+            <div><div style="font-size:12px;color:var(--muted);">歷史出現</div><div style="font-size:24px;font-weight:800;">${records.length}</div></div>
+            <div><div style="font-size:12px;color:var(--muted);">開閒</div><div style="font-size:24px;font-weight:800;color:var(--player);">${playerWins}</div></div>
+            <div><div style="font-size:12px;color:var(--muted);">開莊</div><div style="font-size:24px;font-weight:800;color:var(--banker);">${bankerWins}</div></div>
+            <div><div style="font-size:12px;color:var(--muted);">開和</div><div style="font-size:24px;font-weight:800;color:var(--tie);">${tieWins}</div></div>
+          </div>
+          <div style="margin-top:12px;color:var(--muted);">M 方法歷史準確率：<span style="color:var(--text);font-weight:800;">${Math.round((mainCorrect / records.length) * 100)}%</span></div>
+        `;
+      }
+      section.classList.remove('hidden');
+    }
+
+    function getValues() {
+      const ids = ['player1', 'player2', 'player3', 'banker1', 'banker2', 'banker3'];
+      return ids.map(id => document.getElementById(id).value);
+    }
+
+    function labelFromRecommendation(recommendation) {
+      if (recommendation === '投注閒家' || recommendation === '下一局開閒') return 'PLAYER';
+      if (recommendation === '投注莊家' || recommendation === '下一局開莊') return 'BANKER';
+      return 'TIE';
+    }
+
+    function setPill(el, type, label) {
+      el.className = `pill ${type}`;
+      el.textContent = label;
+    }
+
+    function calculateBaccarat() {
+      const [player1Val, player2Val, player3Val, banker1Val, banker2Val, banker3Val] = getValues();
+      if (!player1Val || !player2Val || !banker1Val || !banker2Val) {
+        alert('請至少輸入閒家和莊家的前兩張牌');
+        return;
+      }
+
+      const player1 = parseInt(player1Val) || 0;
+      const player2 = parseInt(player2Val) || 0;
+      const player3 = player3Val ? (parseInt(player3Val) || 0) : 0;
+      const banker1 = parseInt(banker1Val) || 0;
+      const banker2 = parseInt(banker2Val) || 0;
+      const banker3 = banker3Val ? (parseInt(banker3Val) || 0) : 0;
+
+      const playerTotal = player1 + player2 + player3;
+      const bankerTotal = banker1 + banker2 + banker3;
+      const selectedCards = [player1Val, player2Val, player3Val, banker1Val, banker2Val, banker3Val]
+        .map(v => v === '' ? null : parseInt(v));
+      const publicCardCount = selectedCards.filter(card => card === 0).length;
+
+      const baseDiff = playerTotal - bankerTotal;
+      const baseDiffSign = baseDiff >= 0 ? 1 : -1;
+      const publicCardSign = publicCardCount % 2 === 0 ? 1 : -1;
+      const finalSign = baseDiffSign * publicCardSign;
+      const absDiff = Math.abs(baseDiff);
+      const finalResult = absDiff * finalSign;
+
+      currentMainRecommendation = finalResult > 0 ? '投注閒家' : '投注莊家';
+      currentPatternKey = generatePatternKey();
+      showPatternHistory(currentPatternKey);
+
+      document.getElementById('publicCards').textContent = `${publicCardCount} 張`;
+      document.getElementById('publicType').textContent = publicCardCount % 2 === 0 ? '雙數（+1）' : '單數（-1）';
+      document.getElementById('baseDiff').textContent = baseDiff > 0 ? `+${baseDiff}` : `${baseDiff}`;
+      document.getElementById('pointSummary').textContent = `P${playerTotal} ｜ B${bankerTotal}`;
+      document.getElementById('finalResult').textContent = finalResult > 0 ? `+${finalResult}` : `${finalResult}`;
+      document.getElementById('finalResult').className = `recommend-big ${finalResult > 0 ? 'positive' : 'negative'}`;
+
+      setPill(
+        document.getElementById('methodMPill'),
+        currentMainRecommendation === '投注閒家' ? 'player' : 'banker',
+        labelFromRecommendation(currentMainRecommendation)
+      );
+
+      calculateRoadmapPrediction(player1, player2, player3, banker1, banker2, banker3);
+      document.getElementById('results').classList.remove('hidden');
+      document.getElementById('feedbackSection').classList.remove('hidden');
+      setResultSelection('player');
+    }
+
+    function calculateRoadmapPrediction(p1, p2, p3, b1, b2, b3) {
+      const getTailNumber = (num) => num === 0 ? 0 : num % 10;
+      const playerTail = (getTailNumber(p1) + getTailNumber(p2) + getTailNumber(p3)) % 10;
+      const bankerTail = (getTailNumber(b1) + getTailNumber(b2) + getTailNumber(b3)) % 10;
+      const tailSum = playerTail + bankerTail;
+
+      let initialPrediction = '';
+      if (tailSum >= 1 && tailSum <= 9) initialPrediction = '下一局開閒';
+      else if (tailSum >= 10 && tailSum <= 18) initialPrediction = '下一局開莊';
+      else initialPrediction = '下一局開和';
+
+      const allCards = [p1, p2, p3, b1, b2, b3].filter(v => v !== null && v !== '');
+      const totalCards = allCards.length;
+      const hasHighCard = allCards.some(c => c === 0);
+
+      let finalPrediction = initialPrediction;
+      let adjustmentInfo = `${totalCards}張 → 不調整`;
+      if (totalCards >= 5 && totalCards <= 6 && initialPrediction !== '下一局開和') {
+        finalPrediction = initialPrediction === '下一局開閒' ? '下一局開莊' : '下一局開閒';
+        adjustmentInfo = `${totalCards}張有補牌 → 反轉`;
+      } else if (totalCards === 4 && initialPrediction !== '下一局開和') {
+        if (!hasHighCard) {
+          finalPrediction = initialPrediction === '下一局開閒' ? '下一局開莊' : '下一局開閒';
+          adjustmentInfo = '4張無公牌 → 反轉';
+        } else {
+          adjustmentInfo = '4張有公牌 → 不變';
+        }
+      }
+
+      currentRoadmapRecommendation = finalPrediction;
+      document.getElementById('tailSumValue').textContent = `${tailSum}`;
+      document.getElementById('tailSumDisplay').textContent = `P:${playerTail} ｜ B:${bankerTail}`;
+      document.getElementById('roadmapMiniBadge').textContent = `Initial: ${labelFromRecommendation(initialPrediction)}`;
+      document.getElementById('adjustmentInfoDisplay').textContent = adjustmentInfo;
+      document.getElementById('finalRoadmapPredictionText').textContent = labelFromRecommendation(finalPrediction);
+      document.getElementById('finalRoadmapPredictionText').className = 'method-mini-value ' + (finalPrediction === '下一局開閒' ? 'positive' : finalPrediction === '下一局開莊' ? 'negative' : '');
+
+      setPill(
+        document.getElementById('methodRPill'),
+        finalPrediction === '下一局開閒' ? 'player' : finalPrediction === '下一局開莊' ? 'banker' : 'tie',
+        labelFromRecommendation(finalPrediction)
+      );
+    }
+
+    function setResultSelection(type) {
+      currentSelectedResult = type;
+      ['resultPlayer', 'resultBanker', 'resultTie'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+      });
+      document.getElementById(type === 'player' ? 'resultPlayer' : type === 'banker' ? 'resultBanker' : 'resultTie').classList.add('active');
+    }
+
+    function checkMethodResult(predictionLabel, actual) {
+      if (actual === 'tie') return { status: 'tie', text: '和' };
+      if ((predictionLabel === 'PLAYER' && actual === 'player') || (predictionLabel === 'BANKER' && actual === 'banker')) {
+        return { status: 'ok', text: '準' };
+      }
+      return { status: 'fail', text: 'X' };
+    }
+
+    function recordResult() {
+      if (!currentMainRecommendation || !currentPatternKey || !currentRoadmapRecommendation) {
+        alert('請先計算結果');
+        return;
+      }
+
+      const actualResultText = currentSelectedResult === 'player' ? '開閒' : currentSelectedResult === 'banker' ? '開莊' : '開和';
+      const mLabel = labelFromRecommendation(currentMainRecommendation);
+      const rLabel = labelFromRecommendation(currentRoadmapRecommendation);
+      const mCheck = checkMethodResult(mLabel, currentSelectedResult);
+      const rCheck = checkMethodResult(rLabel, currentSelectedResult);
+      const now = Date.now();
+
+      const record = {
+        game: gameHistory.length + 1,
+        patternKey: currentPatternKey,
+        mainRecommendation: currentMainRecommendation,
+        mainLabel: mLabel,
+        roadmapRecommendation: currentRoadmapRecommendation,
+        roadmapLabel: rLabel,
+        result: actualResultText,
+        actual: currentSelectedResult,
+        mainCorrect: mCheck.status === 'ok' ? true : mCheck.status === 'fail' ? false : null,
+        roadmapCorrect: rCheck.status === 'ok' ? true : rCheck.status === 'fail' ? false : null,
+        mainStatusText: mCheck.text,
+        roadmapStatusText: rCheck.text,
+        timestamp: now
+      };
+
+      gameHistory.push(record);
+
+      if (!patternDatabase[currentPatternKey]) patternDatabase[currentPatternKey] = [];
+      patternDatabase[currentPatternKey].push(record);
+      savePatternDatabase();
+
+      updateHistoryDisplay();
+      updateStatistics();
+      resetForm();
+      document.getElementById('feedbackSection').classList.add('hidden');
+      document.getElementById('results').classList.add('hidden');
+      document.getElementById('patternHistorySection').classList.add('hidden');
+      currentMainRecommendation = '';
+      currentRoadmapRecommendation = '';
+    }
+
+    function resetForm() {
+      ['player1', 'player2', 'player3', 'banker1', 'banker2', 'banker3'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+
+    function updateHistoryDisplay() {
+      const historyList = document.getElementById('historyList');
+      document.getElementById('gameCount').textContent = `(${gameHistory.length})`;
+      document.getElementById('totalGamesDisplay').textContent = gameHistory.length;
+
+      if (!gameHistory.length) {
+        historyList.innerHTML = '<div style="text-align:center;color:var(--muted);padding:26px 0;">還無紀錄</div>';
+        return;
+      }
+
+      historyList.innerHTML = gameHistory.slice().reverse().map(game => {
+        const resultTypeClass = game.actual === 'player' ? 'player' : game.actual === 'banker' ? 'banker' : 'tie';
+        const resultLabel = game.actual === 'player' ? 'PLAYER' : game.actual === 'banker' ? 'BANKER' : 'TIE';
+        const mStatusClass = game.mainCorrect === true ? 'status-ok' : game.mainCorrect === false ? 'status-fail' : 'status-tie';
+        const rStatusClass = game.roadmapCorrect === true ? 'status-ok' : game.roadmapCorrect === false ? 'status-fail' : 'status-tie';
+        const timeStr = game.timestamp ? new Date(game.timestamp).toLocaleString('zh-TW') : '-';
+
+        return `
+          <div class="history-card">
+            <div class="history-card-top">
+              <div class="history-index">#${game.game}</div>
+              <div class="pill ${resultTypeClass}" style="min-width:110px;padding:10px 14px;">${resultLabel}</div>
+            </div>
+            <div class="history-methods">
+              <div class="method-records">
+                <div class="method-record">
+                  <span class="method-code">M（主）</span>
+                  <span class="method-predict ${game.mainLabel === 'PLAYER' ? 'positive' : game.mainLabel === 'BANKER' ? 'negative' : ''}">${game.mainLabel}</span>
+                  <span class="method-status ${mStatusClass}">${game.mainStatusText}</span>
+                </div>
+                <div class="method-record">
+                  <span class="method-code">R（跑）</span>
+                  <span class="method-predict ${game.roadmapLabel === 'PLAYER' ? 'positive' : game.roadmapLabel === 'BANKER' ? 'negative' : ''}">${game.roadmapLabel}</span>
+                  <span class="method-status ${rStatusClass}">${game.roadmapStatusText}</span>
+                </div>
+              </div>
+              <div style="text-align:right;color:var(--muted);font-size:12px;">結果：${game.result}</div>
+            </div>
+            <div class="history-footer">
+              <span>${game.patternKey}</span>
+              <span>${timeStr}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateStatistics() {
+      const ties = gameHistory.filter(g => g.actual === 'tie').length;
+      const mTotal = gameHistory.filter(g => g.mainCorrect !== null).length;
+      const rTotal = gameHistory.filter(g => g.roadmapCorrect !== null).length;
+      const mCorrect = gameHistory.filter(g => g.mainCorrect === true).length;
+      const rCorrect = gameHistory.filter(g => g.roadmapCorrect === true).length;
+      const mFail = gameHistory.filter(g => g.mainCorrect === false).length;
+      const rFail = gameHistory.filter(g => g.roadmapCorrect === false).length;
+
+      document.getElementById('accuracyDisplayM').textContent = mTotal ? `${((mCorrect / mTotal) * 100).toFixed(1)}%` : '-';
+      document.getElementById('accuracyDisplayR').textContent = rTotal ? `${((rCorrect / rTotal) * 100).toFixed(1)}%` : '-';
+      document.getElementById('methodMCount').textContent = `${mCorrect} / ${mFail}`;
+      document.getElementById('tieCount').textContent = ties;
+    }
+
+    function exportToExcel() {
+      if (!gameHistory.length) {
+        alert('暫無數據可匯出');
+        return;
+      }
+
+      let csv = '局數,牌型,M方法,R方法,實際結果,M是否正確,R是否正確,時間\n';
+      gameHistory.forEach(game => {
+        const timeStr = game.timestamp ? new Date(game.timestamp).toLocaleString('zh-TW') : '-';
+        const mState = game.mainCorrect === null ? '和局' : game.mainCorrect ? '正確' : '失敗';
+        const rState = game.roadmapCorrect === null ? '和局' : game.roadmapCorrect ? '正確' : '失敗';
+        csv += `${game.game},${game.patternKey},${game.mainLabel},${game.roadmapLabel},${game.result},${mState},${rState},${timeStr}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `baccarat_dual_method_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+    }
+
+    function showAnalytics() {
+      if (!gameHistory.length) {
+        alert('暫無數據可分析');
+        return;
+      }
+      const ties = gameHistory.filter(g => g.actual === 'tie').length;
+      const mCorrect = gameHistory.filter(g => g.mainCorrect === true).length;
+      const rCorrect = gameHistory.filter(g => g.roadmapCorrect === true).length;
+      const mCount = gameHistory.filter(g => g.mainCorrect !== null).length;
+      const rCount = gameHistory.filter(g => g.roadmapCorrect !== null).length;
+      alert(`📊 雙方法分析\n總局數: ${gameHistory.length}\n和局: ${ties}\n\nM 方法準確率: ${mCount ? ((mCorrect / mCount) * 100).toFixed(1) : '-'}%\nR 方法準確率: ${rCount ? ((rCorrect / rCount) * 100).toFixed(1) : '-'}%`);
+    }
+
+    function importDataBatch() {
+      const input = prompt('貼入數據（格式：M方法,R方法,結果，例如 PLAYER,BANKER,開閒）');
+      if (!input) return;
+
+      let count = 0;
+      input.trim().split('\n').forEach(line => {
+        const [m, r, result] = line.split(',').map(v => v.trim());
+        if (!m || !r || !result) return;
+        const actual = result === '開閒' ? 'player' : result === '開莊' ? 'banker' : 'tie';
+        const mCheck = checkMethodResult(m, actual);
+        const rCheck = checkMethodResult(r, actual);
+        gameHistory.push({
+          game: gameHistory.length + 1,
+          patternKey: '-',
+          mainRecommendation: m === 'PLAYER' ? '投注閒家' : '投注莊家',
+          mainLabel: m,
+          roadmapRecommendation: r === 'PLAYER' ? '下一局開閒' : '下一局開莊',
+          roadmapLabel: r,
+          result,
+          actual,
+          mainCorrect: mCheck.status === 'ok' ? true : mCheck.status === 'fail' ? false : null,
+          roadmapCorrect: rCheck.status === 'ok' ? true : rCheck.status === 'fail' ? false : null,
+          mainStatusText: mCheck.text,
+          roadmapStatusText: rCheck.text,
+          timestamp: Date.now()
+        });
+        count += 1;
+      });
+
+      if (count) {
+        updateHistoryDisplay();
+        updateStatistics();
+        alert(`成功導入 ${count} 筆`);
+      }
+    }
+
+    function showTopPatterns() {
+      const sorted = Object.entries(patternDatabase).sort(([, a], [, b]) => b.length - a.length).slice(0, 10);
+      if (!sorted.length) {
+        alert('暫無牌型資料');
+        return;
+      }
+      let text = 'Top 10 牌局\n\n';
+      sorted.forEach(([key, records]) => {
+        const playerWins = records.filter(r => r.result === '開閒').length;
+        const bankerWins = records.filter(r => r.result === '開莊').length;
+        const tieWins = records.filter(r => r.result === '開和').length;
+        text += `${key}｜${records.length}次｜閒:${playerWins} 莊:${bankerWins} 和:${tieWins}\n`;
+      });
+      alert(text);
+    }
+
+    function clearAllData() {
+      if (!confirm('確定清除所有紀錄？')) return;
+      if (!confirm('再次確認，會清除雙方法紀錄與牌型資料庫')) return;
+      gameHistory = [];
+      patternDatabase = {};
+      localStorage.removeItem('baccaratPatternsDual');
+      updateHistoryDisplay();
+      updateStatistics();
+      updateDatabaseInfo();
+    }
+
+    document.addEventListener('keypress', event => {
+      if (event.key === 'Enter') calculateBaccarat();
+    });
+  </script>
+</body>
+
+</html>
